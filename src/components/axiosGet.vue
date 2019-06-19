@@ -1,41 +1,45 @@
 <template>
   <div class="hello">
-    <em><p>Description Data:</p></em>
-    Object: <b>{{pokemon.descriptions[0]}}</b>
-    <br>
-
-    <em><p>Breaking it down:</p></em>
-    Description: <b>{{ pokemon.descriptions[0].description}}</b>
-    <br>
-    Language Name: <b>{{ pokemon.descriptions[0].language.name}}</b>
-    <br>
-    The URL is: <b>{{ pokemon.descriptions[0].language.url}}</b>
-
-    <em><p>Other responses:</p></em>
-    {{otherResponses}}
-
+    Open Dev Tools to get what you're looking for!
+<!--    <br>-->
+<!--     {{pokemon}}-->
   </div>
+
 </template>
 
 <script>
+
   import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
 
   data () {
     return {
-      pokemon : {},
-      otherResponses: {}
-
+      pokemon : {}
     }
   },
 
   created () {
-    axios.get('https://pokeapi.co/api/v2/pokedex/kanto/')
+    axios.get('https://reqres.in/api/users/2')
+            .then(response => {
+              console.log(response.data)
+              // this.pokemon = response.data
+            })
+            .catch(err => {
+              console.log(err)
+            })
+
+    let data_post = {
+      'name' : 'Kuttoh',
+      'job' : 'Intern',
+    }
+
+    axios.post('https://reqres.in/api/users', data_post)
             .then(response => {
               console.log(response)
-              this.pokemon = response.data,
-              this.otherResponses= [response.status, response.statusText, response.headers, response.config]
+              this.pokemon = response.data
+              // this.otherResponses= [response.status, response.statusText, response.headers, response.config]
             })
             .catch(err => {
               console.log(err)
